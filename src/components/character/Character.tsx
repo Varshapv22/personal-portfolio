@@ -5,7 +5,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 import { SkeletonUtils } from "three-stdlib";
 import { journeyCurve } from "../../utils/path";
 import { journeyProgress, useJourneyStore } from "../../state/journeyStore";
-import { chapters, chapterIndexAt, localProgressAt, HOSPITAL_HOLD } from "../../data/chapters";
+import { chapters, chapterIndexAt, localProgressAt, INTRO_HOLD } from "../../data/chapters";
 import { outfits } from "./outfits";
 import { recolorShirtPixels } from "./recolorTexture";
 
@@ -156,8 +156,8 @@ export default function Character() {
 
     const idx = chapterIndexAt(t);
     const local = localProgressAt(t, idx);
-    const inHospitalHold = chapters[idx].id === "childhood" && local < HOSPITAL_HOLD;
-    if (rig.current) rig.current.visible = !inHospitalHold;
+    const inIntroHold = chapters[idx].id === "childhood" && local < INTRO_HOLD;
+    if (rig.current) rig.current.visible = !inIntroHold;
   });
 
   return (

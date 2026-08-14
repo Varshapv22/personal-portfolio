@@ -4,7 +4,7 @@ import { mulberry32 } from "../components/environment/blocks/rng";
 import Ground from "../components/environment/blocks/Ground";
 import Trees from "../components/environment/blocks/Trees";
 import GlowParticles from "../components/environment/blocks/GlowParticles";
-import HospitalScene from "./HospitalScene";
+import TechIntroScene from "./TechIntroScene";
 
 const range = chapterWorldRanges.find((r) => r.id === "childhood")!;
 const L = range.length;
@@ -302,7 +302,7 @@ export default function ChildhoodScene() {
   return (
     <group>
       <Ground chapterId="childhood" z={Z} length={L} />
-      <HospitalScene />
+      <TechIntroScene />
 
       {/* ── Trees — coconut avenue + background depth ── */}
       <Trees z={Z} length={L} count={32} seed={11} variant="coconut" roadWidth={2.6} />

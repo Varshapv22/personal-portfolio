@@ -4,8 +4,8 @@
   z-index: 100;
   /* A vignette, not a wall — opaque enough at the top and bottom to keep the
      nav bar hidden and the text legible, but sheer through the middle so the
-     3D scene (the fixed-camera hospital vignette, at rest at t=0) reads as a
-     preview of what's behind the curtain rather than being fully hidden. */
+     3D scene (the fixed-camera tech-intro vignette, at rest at t=0) reads as
+     a preview of what's behind the curtain rather than being fully hidden. */
   background: linear-gradient(
     180deg,
     rgba(6, 7, 15, 0.97) 0%,

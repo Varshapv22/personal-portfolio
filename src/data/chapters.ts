@@ -63,6 +63,11 @@ const day: Theme = { sky: "#bfe3ff", fog: "#dff0ff", ambient: "#eef7ff", sun: "#
 const brightDay: Theme = { sky: "#a9dcff", fog: "#e9f6ff", ambient: "#ffffff", sun: "#ffffff", sunIntensity: 1.9, accent: "#2f9e6e" };
 const coolCode: Theme = { sky: "#0c1224", fog: "#0a0f1e", ambient: "#1c2a4a", sun: "#6fb8ff", sunIntensity: 0.9, accent: "#4fd1ff" };
 const office: Theme = { sky: "#e7eef5", fog: "#dfe8f2", ambient: "#f4f7fb", sun: "#ffffff", sunIntensity: 1.3, accent: "#5b6cff" };
+// A slightly warmer, greener variant of `office` for iOSS specifically — same
+// professional daylight family, but distinct enough (ambient/sun both nudged
+// toward the money-plant greenery accent) that it doesn't read as identical
+// to BTRAC's cooler institute-blue "office" atmosphere.
+const officeGreen: Theme = { sky: "#e9f2ea", fog: "#e2eee2", ambient: "#f5faf3", sun: "#fffaf0", sunIntensity: 1.35, accent: "#3f8f4f" };
 const server: Theme = { sky: "#040611", fog: "#05070f", ambient: "#0e1630", sun: "#3fe0ff", sunIntensity: 0.7, accent: "#3fe0ff" };
 const payment: Theme = { sky: "#060812", fog: "#070a16", ambient: "#101a33", sun: "#7ef7c4", sunIntensity: 0.8, accent: "#7ef7c4" };
 const future: Theme = { sky: "#ffd9a0", fog: "#ffe3b8", ambient: "#fff2da", sun: "#ffffff", sunIntensity: 2, accent: "#ff8a3c" };
@@ -194,7 +199,7 @@ export const chapters: Chapter[] = [
     progressLabel: "08 Infinite Open Source",
     kit: "office-ioss",
     weight: 1.4,
-    theme: office,
+    theme: officeGreen,
     outfit: "engineer",
     cameraStyle: "follow",
     captions: [
@@ -346,10 +351,10 @@ export const chapters: Chapter[] = [
   },
 ];
 
-// The opening slice of the "childhood" chapter is a hospital/birth vignette:
-// no walking character (newborns don't walk), camera holds on the bassinet.
-// See HospitalScene.tsx + Character.tsx/CameraRig.tsx's hospital-hold branch.
-export const HOSPITAL_HOLD = 0.14;
+// The opening slice of the "childhood" chapter is a held tech-showcase intro:
+// no walking character yet, camera holds on the floating stack of icons.
+// See TechIntroScene.tsx + Character.tsx/CameraRig.tsx's intro-hold branch.
+export const INTRO_HOLD = 0.14;
 
 export const totalWeight = chapters.reduce((s, c) => s + c.weight, 0);
 

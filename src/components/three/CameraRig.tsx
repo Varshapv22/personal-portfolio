@@ -1,9 +1,9 @@
 import { useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { journeyCurve, hospitalAnchor } from "../../utils/path";
+import { journeyCurve, introAnchor } from "../../utils/path";
 import { journeyProgress, useJourneyStore } from "../../state/journeyStore";
-import { chapters, chapterIndexAt, localProgressAt, HOSPITAL_HOLD } from "../../data/chapters";
+import { chapters, chapterIndexAt, localProgressAt, INTRO_HOLD } from "../../data/chapters";
 
 const UP = new THREE.Vector3(0, 1, 0);
 
@@ -35,16 +35,16 @@ export default function CameraRig() {
     journeyCurve.getTangentAt(t, tangent);
     right.crossVectors(tangent, UP).normalize();
 
-    const inHospitalHold = chapter.id === "childhood" && local < HOSPITAL_HOLD;
-    const style = inHospitalHold ? "hospital" : chapter.cameraStyle;
+    const inIntroHold = chapter.id === "childhood" && local < INTRO_HOLD;
+    const style = inIntroHold ? "intro" : chapter.cameraStyle;
     const lambda = reducedMotion ? 18 : 4.8;
 
-    if (style === "hospital") {
-      // Fixed close shot on the bassinet — deliberately does NOT track `point`
-      // (unstable this close to the curve's t=0 start) or scroll progress;
-      // it's a held frame, not something the camera dollies through.
-      desiredPos.set(hospitalAnchor.x + 0.6, hospitalAnchor.y + 1.7, hospitalAnchor.z + 3.6);
-      desiredLook.set(hospitalAnchor.x, hospitalAnchor.y + 0.55, hospitalAnchor.z - 0.6);
+    if (style === "intro") {
+      // Fixed shot on the floating tech-card cluster — deliberately does NOT
+      // track `point` (unstable this close to the curve's t=0 start) or
+      // scroll progress; it's a held frame, not something the camera dollies through.
+      desiredPos.set(introAnchor.x + 0.6, introAnchor.y + 1.7, introAnchor.z + 3.6);
+      desiredLook.set(introAnchor.x, introAnchor.y + 0.55, introAnchor.z - 0.6);
     } else if (style === "follow") {
       desiredPos.copy(point).addScaledVector(tangent, -3.6).addScaledVector(UP, 2.1);
       desiredLook.copy(point).addScaledVector(tangent, 3).addScaledVector(UP, 0.9);
