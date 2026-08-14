@@ -1,0 +1,102 @@
+.narrative-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.narrative-caption {
+  position: absolute;
+  left: 50%;
+  bottom: 16%;
+  transform: translateX(-50%);
+  max-width: min(78vw, 780px);
+  text-align: center;
+  font-family: var(--font-display);
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 0.15s linear;
+  text-wrap: balance;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.narrative-caption[data-style="lead"] {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.narrative-caption[data-style="sub"] {
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  font-weight: 400;
+  color: var(--ink-dim);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+.narrative-caption[data-style="label"] {
+  font-size: clamp(0.68rem, 1vw, 0.82rem);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-family: var(--font-body);
+}
+
+.narrative-caption[data-style="quote"] {
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-dim);
+  line-height: 1.4;
+}
+
+.narrative-panel {
+  position: absolute;
+  right: 6%;
+  top: 28%;
+  min-width: 200px;
+  max-width: 280px;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.2s linear;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-left: 2px solid var(--accent);
+}
+
+.narrative-panel strong {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.narrative-panel span {
+  display: block;
+  font-size: 0.84rem;
+  color: var(--ink-dim);
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .narrative-caption {
+    bottom: 20%;
+    max-width: 88vw;
+  }
+  .narrative-panel {
+    right: 5%;
+    left: 5%;
+    max-width: unset;
+    top: auto;
+    bottom: 30%;
+  }
+}

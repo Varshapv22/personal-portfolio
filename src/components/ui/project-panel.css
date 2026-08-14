@@ -1,0 +1,93 @@
+.project-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(6, 7, 15, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.project-panel {
+  position: relative;
+  width: min(92vw, 460px);
+  border-radius: 10px;
+  padding: 2rem 1.8rem;
+}
+
+.project-panel__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: none;
+  border: 1px solid transparent;
+  color: var(--ink-dim);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.project-panel__close:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--glass-border);
+}
+
+.project-panel__stack {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+
+.project-panel h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin: 0 0 0.8rem;
+}
+
+.project-panel__desc {
+  color: var(--ink-dim);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0 0 1.2rem;
+}
+
+.project-panel__flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-panel__flow li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+}
+
+.project-panel__flow li span {
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  color: var(--ink);
+  display: inline-block;
+}
+
+.project-panel__flow li:not(:last-child)::after {
+  content: "→";
+  color: var(--ink-faint);
+  font-size: 0.7rem;
+}
