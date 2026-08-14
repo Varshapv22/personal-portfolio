@@ -5,7 +5,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
+  /* Always none — this wrapper only exists to center the card and spans the
+     full viewport, so if it ever captured pointer events it would block
+     wheel/scroll input to the canvas behind it everywhere on screen, not
+     just over the visible card. Opacity/pointer-events live on the card
+     itself (.contact-section__inner) instead. */
+  pointer-events: none;
   padding: 1.5rem;
 }
 
@@ -14,6 +19,12 @@
   border-radius: 12px;
   padding: 2.6rem 2.4rem;
   text-align: center;
+  opacity: 0;
+  /* The card's own background/whitespace shouldn't trap the scroll wheel
+     either — only its links/buttons should be clickable. Wheeling with the
+     cursor resting over blank card padding now falls through to the canvas
+     instead of getting stuck the moment the card is on screen. */
+  pointer-events: none;
 }
 
 .contact-section__eyebrow {
@@ -67,6 +78,15 @@
   text-decoration: none;
   border-bottom: 1px solid var(--glass-border);
   transition: color 0.2s ease, border-color 0.2s ease;
+  /* Individually opt back into pointer-events — the card itself is
+     none (see .contact-section__inner) so only these actual links/buttons
+     are clickable, and only once the card is visible enough (JS-toggled
+     .is-interactive on the card, gating both this and .contact-btn below). */
+  pointer-events: none;
+}
+
+.contact-section__inner.is-interactive .contact-section__details a {
+  pointer-events: auto;
 }
 
 .contact-section__details a:hover {
@@ -91,6 +111,11 @@
   font-size: 0.84rem;
   font-weight: 400;
   transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+  pointer-events: none;
+}
+
+.contact-section__inner.is-interactive .contact-btn {
+  pointer-events: auto;
 }
 
 .contact-btn:hover {

@@ -18,12 +18,17 @@ export default function ContactSection() {
     const local = localProgressAt(t, idx);
     const opacity = idx === CONTACT_INDEX ? Math.min(1, local / 0.12) : 0;
     ref.current.style.opacity = String(opacity);
-    ref.current.style.pointerEvents = opacity > 0.6 ? "auto" : "none";
+    ref.current.classList.toggle("is-interactive", opacity > 0.6);
   }, started);
 
+  // The outer wrapper and the card itself are both permanently pointer-events:none
+  // (see contact-section.css) — a fixed, full-viewport wrapper or an opaque card
+  // that ever captured pointer events would block wheel/scroll input to the canvas
+  // underneath. Only the actual links/buttons opt back into pointer-events, gated
+  // by the "is-interactive" class once the card is visible enough to click.
   return (
-    <div id="contact-section" ref={ref} className="contact-section">
-      <div className="contact-section__inner glass">
+    <div id="contact-section" className="contact-section">
+      <div ref={ref} className="contact-section__inner glass">
         <p className="contact-section__eyebrow">Let's Build Something</p>
         <h2>{contact.name}</h2>
         <p className="contact-section__role">{contact.role}</p>
