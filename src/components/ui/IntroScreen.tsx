@@ -14,7 +14,6 @@ const SKILLS_ROW_1 = [
 ];
 const SKILLS_ROW_2 = [
   { name: "WordPress", color: "#21759b" },
-  { name: "Python",    color: "#3572a5" },
   { name: "HTML",      color: "#e34c26" },
   { name: "CSS",       color: "#264de4" },
   { name: "Git",       color: "#f05032" },
