@@ -5,12 +5,11 @@ import { contact } from "../../data/contact";
 import "./journey-nav.css";
 
 const GROUPS: Array<{ label: string; navGroup: string }> = [
-  { label: "Journey", navGroup: "Journey" },
-  { label: "Education", navGroup: "Education" },
+  { label: "Journey",    navGroup: "Journey" },
+  { label: "Education",  navGroup: "Education" },
   { label: "Experience", navGroup: "Experience" },
-  { label: "Skills", navGroup: "Skills" },
-  { label: "Projects", navGroup: "Projects" },
-  { label: "Contact", navGroup: "Contact" },
+  { label: "Projects",   navGroup: "Projects" },
+  { label: "Contact",    navGroup: "Contact" },
 ];
 
 function IconVolume() {

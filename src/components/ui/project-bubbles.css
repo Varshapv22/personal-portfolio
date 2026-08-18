@@ -1,0 +1,205 @@
+/* ── Container ───────────────────────────────────────────────────────────── */
+.pb-root {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 5rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: all;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding-right: 4px; /* prevent clipping box-shadows */
+}
+
+.pb-root::-webkit-scrollbar { display: none; }
+
+.pb-heading {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(190, 205, 240, 0.35);
+  margin: 0 0 0.2rem 0.25rem;
+  font-weight: 600;
+}
+
+/* ── Card grid ───────────────────────────────────────────────────────────── */
+.pb-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.pb-card {
+  position: relative;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.9rem 1rem 0.8rem;
+  background: rgba(8, 10, 24, 0.82);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  color: #e8eaf2;
+  overflow: hidden;
+  animation: pb-in 0.42s cubic-bezier(0.34, 1.52, 0.64, 1) both;
+  animation-delay: var(--pb-delay, 0s);
+  transition:
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.2s ease,
+    box-shadow 0.22s ease;
+  box-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Top accent border */
+.pb-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 2px;
+  background: var(--pb-c);
+  border-radius: 0 0 4px 4px;
+  opacity: 0.6;
+  transition: left 0.22s ease, right 0.22s ease, opacity 0.2s ease;
+}
+
+.pb-card:hover {
+  transform: translateY(-3px) scale(1.015);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 0 0 1px var(--pb-c),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.pb-card:hover::before {
+  left: 6%;
+  right: 6%;
+  opacity: 1;
+}
+
+/* ── Glow ────────────────────────────────────────────────────────────────── */
+.pb-card__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--pb-c), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.pb-card:hover .pb-card__glow {
+  opacity: 0.08;
+}
+
+/* ── Header row (icon + badge) ───────────────────────────────────────────── */
+.pb-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.pb-card__icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--pb-c);
+}
+
+.pb-card__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.pb-card__badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pb-c);
+  background: color-mix(in srgb, var(--pb-c) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pb-c) 30%, transparent);
+  border-radius: 999px;
+  padding: 0.18rem 0.55rem;
+  white-space: nowrap;
+}
+
+/* ── Name ────────────────────────────────────────────────────────────────── */
+.pb-card__name {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: #f2f4fc;
+}
+
+/* ── Stack pills ─────────────────────────────────────────────────────────── */
+.pb-card__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.pb-card__pill {
+  font-size: 0.62rem;
+  font-weight: 500;
+  padding: 0.18rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: rgba(200, 215, 255, 0.6);
+  white-space: nowrap;
+}
+
+/* ── Footer CTA ──────────────────────────────────────────────────────────── */
+.pb-card__footer {
+  margin-top: 0.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.pb-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--pb-c);
+  opacity: 0.7;
+  transition: opacity 0.18s ease, gap 0.18s ease;
+}
+
+.pb-card:hover .pb-card__cta {
+  opacity: 1;
+  gap: 0.5rem;
+}
+
+/* ── Entry animation ─────────────────────────────────────────────────────── */
+@keyframes pb-in {
+  from {
+    opacity: 0;
+    transform: translateX(-22px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}

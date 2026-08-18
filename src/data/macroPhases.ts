@@ -4,14 +4,13 @@ export interface MacroPhase {
 }
 
 export const macroPhases: MacroPhase[] = [
-  { label: "Birth & Childhood", chapterIds: ["childhood"] },
-  { label: "School", chapterIds: ["school"] },
-  { label: "College", chapterIds: ["college", "first-code", "certifications"] },
-  { label: "BTRAC", chapterIds: ["btrac", "momentum"] },
-  { label: "iOSS", chapterIds: ["ioss"] },
-  { label: "Engineering", chapterIds: ["skills", "database", "api", "payment", "ai", "engineering"] },
-  { label: "Projects", chapterIds: ["projects"] },
-  { label: "Present", chapterIds: ["current", "future", "contact"] },
+  { label: "Childhood",  chapterIds: ["childhood"] },
+  { label: "School",     chapterIds: ["school"] },
+  { label: "College",    chapterIds: ["college", "first-code", "certifications"] },
+  { label: "BTRAC",      chapterIds: ["btrac"] },
+  { label: "iOSS",       chapterIds: ["ioss"] },
+  { label: "Projects",   chapterIds: ["projects"] },
+  { label: "Contact",    chapterIds: ["contact"] },
 ];
 
 export function macroPhaseIndexForChapter(chapterId: string): number {

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { chapters, chapterRanges, INTRO_HOLD } from "../data/chapters";
+import { chapters, chapterRanges } from "../data/chapters";
 
 // World units per unit of chapter "weight". The whole journey is one continuous
 // road; each chapter owns a contiguous stretch of it.
@@ -39,17 +39,6 @@ controlPoints.push(new THREE.Vector3(0, 0, last.endZ));
 export const journeyCurve = new THREE.CatmullRomCurve3(controlPoints, false, "catmullrom", 0.15);
 // Pre-cache arc-length divisions so getPointAt() is evenly spaced in distance.
 journeyCurve.arcLengthDivisions = Math.max(200, chapterWorldRanges.length * 40);
-
-// Fixed world-space anchor for the opening tech-intro vignette (see INTRO_HOLD).
-// It must NOT sweep with live scroll progress — the CatmullRom curve's tangent
-// is unstable right at t=0, and the scene is a static set piece, not something
-// the camera dollies through — so both TechIntroScene and CameraRig reference
-// this single fixed point instead of `journeyCurve.getPointAt(t)`.
-export const introAnchor = new THREE.Vector3(
-  0,
-  0,
-  chapterWorldRanges[0].startZ + chapterWorldRanges[0].length * INTRO_HOLD * 0.55
-);
 
 export function worldZToGlobalT(z: number): number {
   return Math.min(1, Math.max(0, z / totalPathLength));

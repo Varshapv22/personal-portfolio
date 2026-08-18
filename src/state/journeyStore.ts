@@ -7,6 +7,7 @@ interface JourneyState {
   started: boolean;
   chapterIndex: number;
   activeProject: string | null;
+  dismissedProject: string | null;
   audioOn: boolean;
   reducedMotion: boolean;
   quality: QualityTier;
@@ -14,6 +15,7 @@ interface JourneyState {
   start: () => void;
   setChapterIndex: (i: number) => void;
   setActiveProject: (id: string | null) => void;
+  dismissProject: (id: string) => void;
   toggleAudio: () => void;
   setReducedMotion: (v: boolean) => void;
   setQuality: (q: QualityTier) => void;
@@ -24,6 +26,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   started: false,
   chapterIndex: 0,
   activeProject: null,
+  dismissedProject: null,
   audioOn: false,
   reducedMotion: false,
   quality: "high",
@@ -31,7 +34,12 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   start: () => set({ started: true }),
   setChapterIndex: (i) =>
     set((s) => (s.chapterIndex === i ? s : { chapterIndex: Math.min(Math.max(i, 0), chapters.length - 1) })),
-  setActiveProject: (id) => set({ activeProject: id }),
+  setActiveProject: (id) => set((s) => ({
+    activeProject: id,
+    // Switching to a new project clears the dismissed flag
+    dismissedProject: id !== null && id !== s.dismissedProject ? null : s.dismissedProject,
+  })),
+  dismissProject: (id) => set({ activeProject: null, dismissedProject: id }),
   toggleAudio: () => set((s) => ({ audioOn: !s.audioOn })),
   setReducedMotion: (v) => set({ reducedMotion: v }),
   setQuality: (q) => set({ quality: q }),

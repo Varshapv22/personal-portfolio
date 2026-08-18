@@ -8,6 +8,7 @@ import JourneyNav from "./components/ui/JourneyNav";
 import ProgressIndicator from "./components/ui/ProgressIndicator";
 import NarrativeOverlay from "./components/ui/NarrativeOverlay";
 import ProjectPanel from "./components/ui/ProjectPanel";
+import ProjectBubbles from "./components/ui/ProjectBubbles";
 import ContactSection from "./components/ui/ContactSection";
 import AccessibilityControls from "./components/ui/AccessibilityControls";
 import KeyboardHint from "./components/ui/KeyboardHint";
@@ -49,6 +50,7 @@ export default function App() {
       <JourneyNav />
       <ProgressIndicator />
       <NarrativeOverlay />
+      <ProjectBubbles />
       <ProjectPanel />
       <ContactSection />
       <AccessibilityControls />
