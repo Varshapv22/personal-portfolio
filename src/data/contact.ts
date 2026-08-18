@@ -7,5 +7,5 @@ export const contact = {
   location: "Kannur, Kerala, India",
   linkedin: "https://linkedin.com/in/varsha-pv-b4916923b",
   github: "https://github.com/Varshapv2",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: `${import.meta.env.BASE_URL}resume.pdf`,
 };

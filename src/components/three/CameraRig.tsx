@@ -3,7 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { journeyCurve } from "../../utils/path";
 import { journeyProgress, useJourneyStore, activeCameraRef } from "../../state/journeyStore";
-import { chapters, chapterIndexAt } from "../../data/chapters";
+import { chapterIndexAt } from "../../data/chapters";
 import { projectPortalPositions } from "../../utils/projectPositions";
 
 const UP = new THREE.Vector3(0, 1, 0);

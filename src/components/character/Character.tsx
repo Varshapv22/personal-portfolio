@@ -10,8 +10,8 @@ import { outfits } from "./outfits";
 import { recolorShirtPixels } from "./recolorTexture";
 
 const UP = new THREE.Vector3(0, 1, 0);
-const BODY_URL = "/models/character-body.glb";
-const ANIMS_SRC_URL = "/models/character-anims-src.glb";
+const BODY_URL = `${import.meta.env.BASE_URL}models/character-body.glb`;
+const ANIMS_SRC_URL = `${import.meta.env.BASE_URL}models/character-anims-src.glb`;
 
 useGLTF.preload(BODY_URL);
 useGLTF.preload(ANIMS_SRC_URL);
