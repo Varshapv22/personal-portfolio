@@ -44,14 +44,14 @@ export default function CertsScene() {
   return (
     <group>
       <Ground chapterId="certifications" z={range.startZ} length={range.length} />
-      <CertCard position={[-1.4, 1.8, range.startZ + range.length * 0.32]} title="PHP (Hypertext Preprocessor)" sub="Gtec" year="2023" color="#4fd1ff" />
       <CertCard
-        position={[1.5, 1.9, range.startZ + range.length * 0.68]}
+        position={[-1.4, 1.8, range.startZ + range.length * 0.32]}
         title="Python Data Science with AI Expert"
         sub="Expertz Lab"
         year="2021 – 2022"
-        color="#c39bff"
+        color="#4fd1ff"
       />
+      <CertCard position={[1.5, 1.9, range.startZ + range.length * 0.68]} title="PHP (Hypertext Preprocessor)" sub="Gtec" year="2023" color="#c39bff" />
       <GlowParticles position={[0, 2, range.startZ + range.length / 2]} count={50} color="#c39bff" scale={[6, 4, range.length]} size={1.2} speed={0.2} />
     </group>
   );

@@ -139,8 +139,8 @@ export const chapters: Chapter[] = [
     cameraStyle: "follow",
     captions: [{ at: 0.1, text: "Learning became a discipline.", style: "sub" }],
     panels: [
-      { at: 0.3, title: "PHP (Hypertext Preprocessor)", lines: ["Gtec", "2023"] },
-      { at: 0.7, title: "Python Data Science with AI Expert", lines: ["Expertz Lab", "2021 – 2022"] },
+      { at: 0.3, title: "Python Data Science with AI Expert", lines: ["Expertz Lab", "2021 – 2022"] },
+      { at: 0.7, title: "PHP (Hypertext Preprocessor)", lines: ["Gtec", "2023"] },
     ],
   },
   {
