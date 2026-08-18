@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import type { Camera } from "three";
 import { chapters } from "../data/chapters";
 
 export type QualityTier = "high" | "medium" | "low";
@@ -8,6 +9,7 @@ interface JourneyState {
   chapterIndex: number;
   activeProject: string | null;
   dismissedProject: string | null;
+  nearPortalId: string | null;
   audioOn: boolean;
   reducedMotion: boolean;
   quality: QualityTier;
@@ -16,6 +18,7 @@ interface JourneyState {
   setChapterIndex: (i: number) => void;
   setActiveProject: (id: string | null) => void;
   dismissProject: (id: string) => void;
+  setNearPortal: (id: string | null) => void;
   toggleAudio: () => void;
   setReducedMotion: (v: boolean) => void;
   setQuality: (q: QualityTier) => void;
@@ -27,6 +30,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
   chapterIndex: 0,
   activeProject: null,
   dismissedProject: null,
+  nearPortalId: null,
   audioOn: false,
   reducedMotion: false,
   quality: "high",
@@ -40,6 +44,7 @@ export const useJourneyStore = create<JourneyState>((set) => ({
     dismissedProject: id !== null && id !== s.dismissedProject ? null : s.dismissedProject,
   })),
   dismissProject: (id) => set({ activeProject: null, dismissedProject: id }),
+  setNearPortal: (id) => set((s) => (s.nearPortalId === id ? s : { nearPortalId: id })),
   toggleAudio: () => set((s) => ({ audioOn: !s.audioOn })),
   setReducedMotion: (v) => set({ reducedMotion: v }),
   setQuality: (q) => set({ quality: q }),
@@ -49,3 +54,8 @@ export const useJourneyStore = create<JourneyState>((set) => ({
 // Non-reactive shared progress value written every frame by ScrollBridge and
 // read directly by 3D components — avoids a React re-render on every scroll tick.
 export const journeyProgress = { value: 0 };
+
+// Non-reactive shared camera reference, written every frame by CameraRig —
+// lets 2D DOM overlays (outside the R3F Canvas tree) project 3D points to
+// screen space without needing their own useThree() access.
+export const activeCameraRef: { current: Camera | null } = { current: null };

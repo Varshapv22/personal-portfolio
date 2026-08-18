@@ -83,7 +83,7 @@ export default function JourneyNav() {
         >
           {audioOn ? <IconVolume /> : <IconMute />}
         </button>
-        <a className="journey-nav__resume" href={contact.resumeUrl} download>
+        <a className="journey-nav__resume" href={contact.resumeUrl} download="Varsha_P_V_Resume.pdf">
           Resume
         </a>
       </div>

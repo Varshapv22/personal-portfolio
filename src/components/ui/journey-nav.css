@@ -101,7 +101,7 @@
   font-size: 0.76rem;
   font-weight: 500;
   padding: 0.38rem 0.9rem;
-  border-radius: 5px;
+  border-radius: 6px;
   border: 1px solid var(--accent);
   color: var(--accent);
   text-decoration: none;

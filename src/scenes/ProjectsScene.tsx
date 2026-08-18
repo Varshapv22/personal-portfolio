@@ -1,5 +1,5 @@
 import { chapterWorldRanges } from "../utils/path";
-import { projects } from "../data/projects";
+import { projectPortalPositions } from "../utils/projectPositions";
 import Ground from "../components/environment/blocks/Ground";
 import PortalGate from "../components/environment/blocks/PortalGate";
 import DataStream from "../components/environment/blocks/DataStream";
@@ -11,11 +11,9 @@ export default function ProjectsScene() {
   return (
     <group>
       <Ground chapterId="projects" z={range.startZ} length={range.length} />
-      {projects.map((p, i) => {
-        const z = range.startZ + range.length * ((i + 0.5) / projects.length);
-        const side = i % 2 === 0 ? -1 : 1;
-        const x = side * (2.4 + (i % 3) * 0.5);
-        const rotY = side > 0 ? -0.5 : 0.5;
+      {projectPortalPositions.map(({ project: p, position, rotationY }) => {
+        const [x, , z] = position;
+        const side = Math.sign(x);
         const flowPts: [number, number, number][] = p.flow.map((_, fi) => [
           x + side * (0.4 + fi * 0.32),
           1.1 + (fi % 2) * 0.25,
@@ -23,7 +21,7 @@ export default function ProjectsScene() {
         ]);
         return (
           <group key={p.id}>
-            <PortalGate position={[x, 1.4, z]} rotationY={rotY} name={p.name} stack={p.stack} color={p.accent} id={p.id} />
+            <PortalGate position={position} rotationY={rotationY} project={p} />
             <DataStream points={flowPts} color={p.accent} speed={0.4} />
           </group>
         );

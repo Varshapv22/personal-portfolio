@@ -2,26 +2,47 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useJourneyStore } from "../../../state/journeyStore";
+import type { Project } from "../../../data/projects";
 
 interface PortalGateProps {
+  project: Project;
   position: [number, number, number];
   rotationY?: number;
-  color: string;
-  id: string;
-  // name & stack kept in signature so ProjectsScene needs no change
-  name?: string;
-  stack?: string;
 }
 
-export default function PortalGate({ position, rotationY = 0, color, id }: PortalGateProps) {
+export default function PortalGate({ project, position, rotationY = 0 }: PortalGateProps) {
+  const { id, accent: color } = project;
   const ring = useRef<THREE.Mesh>(null);
-  const activeProject  = useJourneyStore((s) => s.activeProject);
+  const ringMat = useRef<THREE.MeshStandardMaterial>(null);
+  const innerRing = useRef<THREE.Mesh>(null);
+  const glow = useRef<THREE.PointLight>(null);
+  const energy = useRef(0);
+  const activeProject = useJourneyStore((s) => s.activeProject);
   const setActiveProject = useJourneyStore((s) => s.setActiveProject);
   const isActive = activeProject === id;
+  const isNear = useJourneyStore((s) => s.nearPortalId === id);
 
-  // Rotate the ring continuously; no proximity auto-open — bubbles handle that.
-  useFrame(({ clock }) => {
-    if (ring.current) ring.current.rotation.z = clock.elapsedTime * 0.5;
+  useFrame(({ clock }, delta) => {
+    // Smoothly ramp a 0..1 "energy" envelope toward the near/far target instead
+    // of snapping, so the ring visibly builds up as the walker approaches.
+    energy.current = THREE.MathUtils.damp(energy.current, isNear ? 1 : 0, 6, delta);
+    const proximity = energy.current;
+    const elapsed = clock.elapsedTime;
+
+    if (ring.current) {
+      ring.current.rotation.z = elapsed * 0.5;
+      const pulse = 1 + Math.sin(elapsed * 2.2) * 0.035 * (0.4 + proximity);
+      ring.current.scale.setScalar(pulse * (1 + proximity * 0.14));
+    }
+    if (ringMat.current) {
+      ringMat.current.emissiveIntensity = (isActive ? 2.4 : 1) + proximity * 1.8;
+    }
+    if (innerRing.current) {
+      innerRing.current.rotation.z = -elapsed * 0.8 - proximity * elapsed * 0.6;
+    }
+    if (glow.current) {
+      glow.current.intensity = proximity * 2.4;
+    }
   });
 
   return (
@@ -39,12 +60,13 @@ export default function PortalGate({ position, rotationY = 0, color, id }: Porta
         onPointerOut={() => (document.body.style.cursor = "auto")}
       >
         <torusGeometry args={[1.05, 0.05, 8, 24]} />
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={isActive ? 2.4 : 1}
-          toneMapped={false}
-        />
+        <meshStandardMaterial ref={ringMat} color={color} emissive={color} emissiveIntensity={1} toneMapped={false} />
+      </mesh>
+
+      {/* Slim counter-rotating inner ring — layered "portal" read, spins up as you approach */}
+      <mesh ref={innerRing}>
+        <torusGeometry args={[0.76, 0.016, 8, 32]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.8} toneMapped={false} transparent opacity={0.65} />
       </mesh>
 
       {/* Inner translucent fill */}
@@ -59,6 +81,9 @@ export default function PortalGate({ position, rotationY = 0, color, id }: Porta
           side={THREE.DoubleSide}
         />
       </mesh>
+
+      {/* Proximity glow light — brightens as the walker nears the ring */}
+      <pointLight ref={glow} color={color} distance={5} intensity={0} />
     </group>
   );
 }

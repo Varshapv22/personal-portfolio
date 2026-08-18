@@ -61,7 +61,7 @@ export default function ContactSection() {
           <a className="contact-btn contact-btn--primary" href={`mailto:${contact.email}`}>
             Email Me
           </a>
-          <a className="contact-btn" href={contact.resumeUrl} download>
+          <a className="contact-btn" href={contact.resumeUrl} download="Varsha_P_V_Resume.pdf">
             Download Resume
           </a>
         </div>

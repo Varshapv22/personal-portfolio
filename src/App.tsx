@@ -9,6 +9,7 @@ import ProgressIndicator from "./components/ui/ProgressIndicator";
 import NarrativeOverlay from "./components/ui/NarrativeOverlay";
 import ProjectPanel from "./components/ui/ProjectPanel";
 import ProjectBubbles from "./components/ui/ProjectBubbles";
+import PortalPopup from "./components/ui/PortalPopup";
 import ContactSection from "./components/ui/ContactSection";
 import AccessibilityControls from "./components/ui/AccessibilityControls";
 import KeyboardHint from "./components/ui/KeyboardHint";
@@ -51,6 +52,7 @@ export default function App() {
       <ProgressIndicator />
       <NarrativeOverlay />
       <ProjectBubbles />
+      <PortalPopup />
       <ProjectPanel />
       <ContactSection />
       <AccessibilityControls />
