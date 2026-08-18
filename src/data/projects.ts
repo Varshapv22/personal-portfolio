@@ -6,7 +6,7 @@ export interface Project {
   id: string;
   name: string;
   stack: string;
-  kit: "portal-jobs" | "portal-map" | "portal-ai" | "portal-shop" | "portal-turf";
+  kit: "portal-jobs" | "portal-map" | "portal-ai" | "portal-shop" | "portal-turf" | "portal-finance" | "portal-os" | "portal-hr";
   category: string;
   icon: string;
   description: string;
@@ -112,6 +112,65 @@ export const projects: Project[] = [
       { label: "Slot Booking" },
       { label: "Confirmation" },
       { label: "Database" },
+    ],
+    url: "#",
+  },
+  {
+    id: "expense-tracker",
+    name: "Expense Tracker",
+    stack: "Laravel + React.js + MySQL",
+    kit: "portal-finance",
+    category: "Finance Tracker",
+    icon: "finance",
+    accent: "#ffd166",
+    description:
+      "Full-stack personal finance app for tracking income, expenses, transfers, accounts, budgets, bills, debts, and subscriptions — with a dashboard that breaks down daily and monthly spending at a glance.",
+    flow: [
+      { label: "Accounts" },
+      { label: "Transactions" },
+      { label: "Categories" },
+      { label: "Budget" },
+      { label: "Bills & Debts" },
+      { label: "Dashboard" },
+    ],
+    url: "#",
+  },
+  {
+    id: "lifeos",
+    name: "LifeOS",
+    stack: "Laravel + React.js + MySQL",
+    kit: "portal-os",
+    category: "Productivity Suite",
+    icon: "os",
+    accent: "#ff7eb6",
+    description:
+      "A personal Life Operating System — a centralized command center for tasks, goals, calendar, bills, subscriptions, expenses, habits, learning, and journaling, built incrementally module by module.",
+    flow: [
+      { label: "Auth & Onboarding" },
+      { label: "Tasks" },
+      { label: "Calendar" },
+      { label: "Bills & Payments" },
+      { label: "Dashboard" },
+    ],
+    url: "#",
+  },
+  {
+    id: "worksphere",
+    name: "WorkSphere",
+    stack: "Laravel + Next.js + MySQL",
+    kit: "portal-hr",
+    category: "HR SaaS",
+    icon: "hr",
+    accent: "#5b7fff",
+    description:
+      "Multi-tenant HR SaaS platform with per-company tenant isolation and an internal app marketplace for enabling HR modules — employee directory, org chart, attendance, leave, recruitment, payroll, and more, deployed on Docker Swarm.",
+    flow: [
+      { label: "Multi-Tenant Auth" },
+      { label: "App Marketplace" },
+      { label: "Employees" },
+      { label: "Org Chart" },
+      { label: "HR Modules" },
+      { label: "Analytics" },
     ],
     url: "#",
   },
