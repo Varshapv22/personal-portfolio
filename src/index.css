@@ -57,6 +57,19 @@ button {
   background: var(--bg);
 }
 
+/* drei's <ScrollControls> appends its own scrollable div (a sibling of the
+   <canvas> element) to drive scroll — it's a real overflow:auto container, so
+   without this it renders a native scrollbar (Linux/GTK themes show it as a
+   small arrow-button box) even though scrolling itself works fine hidden. */
+.app-root canvas ~ div {
+  scrollbar-width: none;
+}
+.app-root canvas ~ div::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 .glass {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);

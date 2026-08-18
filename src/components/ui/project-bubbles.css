@@ -16,6 +16,23 @@
 
 .pb-root::-webkit-scrollbar { display: none; }
 
+@media (max-width: 720px) {
+  .pb-root {
+    /* On short viewports the full 5-card stack is taller than the screen —
+       anchoring from the bottom (like desktop) then pushes the top of the
+       list up under the fixed nav bar. Anchor both edges instead so it's
+       always clear of the nav above and the a11y toggle below. */
+    left: 0.75rem;
+    right: 0.75rem;
+    top: 5.5rem;
+    bottom: 1rem;
+    max-height: none;
+  }
+  .pb-card {
+    width: 100%;
+  }
+}
+
 .pb-heading {
   font-size: 0.6rem;
   letter-spacing: 0.16em;

@@ -11,7 +11,11 @@
      just over the visible card. Opacity/pointer-events live on the card
      itself (.contact-section__inner) instead. */
   pointer-events: none;
-  padding: 1.5rem;
+  /* Extra top/bottom clearance (beyond the horizontal 1.5rem) so the centered
+     card never lands under the fixed nav (top) or the accessibility toggle
+     (bottom-left) on shorter viewports — both float above this at a higher
+     z-index and would otherwise cover the card's edge content. */
+  padding: 5.5rem 1.5rem 4.5rem;
 }
 
 .contact-section__inner {
@@ -147,5 +151,20 @@
   .contact-section__details {
     grid-template-columns: 1fr;
     text-align: center;
+  }
+  .contact-section__inner {
+    padding: 1.8rem 1.5rem;
+  }
+  .contact-section__details {
+    gap: 0.7rem;
+    margin-bottom: 1.3rem;
+  }
+  .contact-section__actions {
+    gap: 0.5rem;
+    margin-bottom: 1.3rem;
+  }
+  .contact-btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.78rem;
   }
 }

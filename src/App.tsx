@@ -41,7 +41,7 @@ export default function App() {
             setDpr([1, 1]);
           }}
         />
-        <ScrollControls pages={SCROLL_PAGES} damping={0.2}>
+        <ScrollControls pages={SCROLL_PAGES} damping={0.2} style={{ scrollbarWidth: "none" }}>
           <ScrollBridge />
           <Journey3D />
         </ScrollControls>

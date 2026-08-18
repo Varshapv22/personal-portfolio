@@ -132,6 +132,12 @@
 /* ─── Scrollable content area ───────────────────────────────────────────────── */
 .pm-scrollable {
   flex: 1;
+  /* Flex items default to min-height:auto, which stops them from ever
+     shrinking below their content's intrinsic height — that silently
+     defeats overflow-y:auto here (content, including the footer CTA,
+     just gets hard-clipped by .pm-card's overflow:hidden instead of
+     becoming scrollable) whenever the card is taller than the viewport. */
+  min-height: 0;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
