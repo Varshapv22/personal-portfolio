@@ -144,6 +144,9 @@
     padding: 0.55rem 0.9rem;
     /* The dropdown below anchors to this box's edges. */
     position: fixed;
+    /* Only the brand + hamburger are visible now — push the hamburger to the
+       far right edge instead of it sitting right next to the brand. */
+    justify-content: space-between;
   }
 
   /* Collapse the inline desktop layout — everything moves into the dropdown. */
